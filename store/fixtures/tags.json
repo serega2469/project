@@ -1,0 +1,1 @@
+[{"model": "store.tag", "pk": 1, "fields": {"title": "Скидка", "color": "#a52a2a", "slug": "sale"}}, {"model": "store.tag", "pk": 2, "fields": {"title": "Новинка", "color": "#2aaa8a", "slug": "new"}}]

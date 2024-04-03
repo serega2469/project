@@ -1,0 +1,2 @@
+{% load i18n %}
+{% blocktrans %}Удален адрес электронной почты {{email}}.{% endblocktrans %}

@@ -1,0 +1,1 @@
+[{"model": "store.coupon", "pk": 1, "fields": {"code": "Осень2023", "amount": 180.0}}, {"model": "store.coupon", "pk": 2, "fields": {"code": "МЕГАСЕЙЛ", "amount": 799.0}}]

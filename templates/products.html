@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+  <div class="container">
+    <h1>Результаты поиска по запросу "{{ query }}"</h1>
+    <div class="row">
+      {% for item in items %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img src="{{ item.image.url }}" alt="{{ item.title }}" class="bd-placeholder-img card-img-top" width="320" height="320">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.title }}</h5>
+            <p class="card-text">Цена: {{ item.price }}₽</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{{ item.get_absolute_url }}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock content %}

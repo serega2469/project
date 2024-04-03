@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<style>
+#stripeBtnLabel {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 16px;
+  font-variant: normal;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+  display: block;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
+  background-color: #43458b;
+}
+
+.stripe-form {
+  padding: 5px 30px;
+}
+
+#card-errors {
+  height: 20px;
+  padding: 4px 0;
+  color: #fa755a;
+}
+
+.stripe-form-row {
+  width: 100%;
+  float: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.StripeElement {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+
+</style>
+{% endblock extra_head %}
+
+{% block content %}
+<main>
+  <div class="container wow fadeIn">
+    <h2 class="my-5 h2 text-center">Оплата</h2>
+    <div class="row">
+      <div class="col-md-12 mb-4">
+        <div class="card">
+          {% if card %}
+          <div style="padding: 5px 30px;">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" name="use_default_card" id="use_default_card">
+              <label class="custom-control-label" for="use_default_card">Использовать карту по умолчанию:
+                **** **** **** {{ card.last4 }}
+                <span>Exp: {{ card.exp_month }}/{{ card.exp_year }}</span>
+              </label>
+            </div>
+          </div>
+          {% endif %}
+          <div class="current-card-form">
+            <form action="." method="post" class="stripe-form">
+              {% csrf_token %}
+              <input type="hidden" name="use_default" value="true">
+              <div class="stripe-form-row">
+                <button class="btn btn-success" id="stripeBtn">Подтвердить платеж</button>
+              </div>
+              <div id="card-errors" role="alert"></div>
+            </form>
+          </div>
+          <div class="new-card-form">
+            <form action="#" method="post" class="stripe-form" id="stripe-form">
+              {% csrf_token %}
+              <div class="stripe-form-row" id="creditCard">
+                <label for="card-element" id="stripeBtnLabel">Кредитная или дебетовая карта</label>
+                <div id="card-element" class="StripeElement StripeElement--empty">
+                  <!-- There will be a frame for entering a card here -->
+                </div>
+              </div>
+              <div class="stripe-form-row">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" name="save" id="save_card_info">
+                  <label class="custom-control-label" for="save_card_info">Сохраните для будущих покупок</label>
+                </div>
+              </div>
+              <div id="card-errors" role="alert"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% include "order_snippet.html" %}
+    </div>
+  </div>
+</main>
+{% endblock content %}
+
+{% block extra_scripts %}
+<script src="https://js.stripe.com/v3/"></script>
+<script nonce="">
+  // JavaScript code for Stripe and payment transactions
+</script>
+{% endblock extra_scripts %}

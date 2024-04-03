@@ -1,0 +1,8 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Привет от {{ site_name }}!
+
+Вы получили это электронное письмо, потому что пользователь {{ user_display }} указал ваш адрес электронной почты для подключения своей учетной записи.
+
+Чтобы убедиться, что это правильно, перейдите по адресу {{ active_url }}.
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Спасибо от {{ site_name }}!
+{{ site_domain }}{% endblocktrans %}
